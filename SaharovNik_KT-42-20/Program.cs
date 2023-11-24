@@ -2,6 +2,7 @@ using NLog.Web;
 using NLog;
 using SaharovNik_KT_42_20.Database;
 using Microsoft.EntityFrameworkCore;
+using SaharovNik_KT_42_20.ServiceExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
@@ -17,13 +18,10 @@ try
 
     builder.Services.AddDbContext<StudentDbContext>(options =>
         options.UseSqlServer(
-                builder.Configuration.GetConnectionString("DefaultConnection")
-            )
-    );
-    /*builder.Services.AddDbContext<ApplicationDbContext>(
-options => options.UseSqlServer(
-    builder.Configuration.GetConnectionString("DefaultConnection")
-    ));*/
+                builder.Configuration.GetConnectionString("DefaultConnection")));
+
+    builder.Services.AddServices();
+
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.

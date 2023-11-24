@@ -1,4 +1,6 @@
-﻿namespace SaharovNik_KT_42_20.Models
+﻿using System.Text.Json.Serialization;
+
+namespace SaharovNik_KT_42_20.Models
 {
     public class Student
     {
@@ -11,6 +13,18 @@
 
         public int GroupId { get; set; }
 
-        public Group Group { get; set; }
+        //public Group Group { get; set; }
+
+        [JsonIgnore]
+        public Group? Group { get; set; }
+        //public Group? Group { get; set; }
+
+        public string FIO
+        {
+            get
+            {
+                return FirstName + " " + LastName + " " + MiddleName;
+            }
+        }
     }
 }

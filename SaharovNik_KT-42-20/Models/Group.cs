@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace SaharovNik_KT_42_20.Models
 {
@@ -6,5 +7,15 @@ namespace SaharovNik_KT_42_20.Models
     {
         public int GroupId { get; set; }
         public string GroupName { get; set; }
+
+        [JsonIgnore]
+        public List<Student>? Students { get; set; }
+
+        [JsonIgnore]
+        public List<Course>? Courses { get; set; }
+        public bool IsValidGroupName()
+        {
+            return Regex.Match(GroupName, @"/\D*-\d*-\d\d/g").Success;
+        }
     }
 }
